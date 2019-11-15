@@ -41,7 +41,3 @@ protocol.registerSchemesAsPrivileged([{ scheme: 'app', privileges: { standard: t
 ```
   设置supportFetchAPI: true，授权渲染进程访问V8引擎API
 ```
-
-```
-
-```
