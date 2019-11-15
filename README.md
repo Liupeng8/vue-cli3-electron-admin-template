@@ -40,4 +40,5 @@ protocol.registerSchemesAsPrivileged([{ scheme: 'app', privileges: { standard: t
 2、访问谷歌V8引擎API（例如：localStroage，cookie, session等）
 ```
   设置supportFetchAPI: true，授权渲染进程访问V8引擎API
+  
 ```
