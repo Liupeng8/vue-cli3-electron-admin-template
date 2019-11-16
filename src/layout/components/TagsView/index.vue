@@ -101,7 +101,6 @@ export default {
           // when in the broswer use path.resolve, at the electron use url string
           // const tagPath = path.resolve(basePath, route.path)
           const tagPath = basePath.concat(route.path ? '/' + route.path : '')
-          console.log(tagPath)
           tags.push({
             fullPath: tagPath,
             path: tagPath,

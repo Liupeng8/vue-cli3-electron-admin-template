@@ -40,5 +40,7 @@ protocol.registerSchemesAsPrivileged([{ scheme: 'app', privileges: { standard: t
 ```
 3、使用vue-devtools
   先安装vue-devtools,命令：npm install vue-devtools -D
-  因vue-cli-plugin-electron-builder使用了webpack，导致vue-devtools在加载vender/manifest.json时路径错误而无法启动，需手动修改一下路径，暂时未找到方法。
+
+  可能会出现以下问题：
+  vue-devtools在加载vender/manifest.json时可能会出现路径错误而无法启动的问题，需手动修改一下路径，暂时未找到方法。
   const extPath = path.join(__dirname, '..', 'vender')  修改成  const extPath = path.join(__dirname, '../node_modules/vue-devtools', 'vender')
