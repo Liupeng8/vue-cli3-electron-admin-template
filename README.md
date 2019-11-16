@@ -1,5 +1,7 @@
 # vue-cli3-electron-admin-template
 
+本框架适用于后台管理相关场景，整合了 [vue-cli-plugin-electron-builder](https://github.com/nklayman/vue-cli-plugin-electron-builder) 和 [vue-element-admin](https://github.com/PanJiaChen/vue-element-admin)，本框架已应用于公司项目，感谢两位作者。。。有问题欢迎大家提问探讨。。。
+
 ## Project setup
 ```
 npm install
