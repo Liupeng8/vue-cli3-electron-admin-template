@@ -1,20 +1,58 @@
 'use strict'
 const path = require('path')
+const defaultSettings = require('./src/settings.js')
 
 function resolve(dir) {
   return path.join(__dirname, dir)
 }
 
+const name = defaultSettings.title || 'xscloud-admin-template'
+
+// If your port is set to 80,
+// use administrator privileges to execute the command line.
+// For example, Mac: sudo npm run
+// You can change the port by the following method:
+// port = 9527 npm run dev OR npm run dev --port = 9527
+const port = process.env.port || process.env.npm_config_port || 9527 // dev port
+
 module.exports = {
+  lintOnSave: process.env.NODE_ENV === 'development',
+  productionSourceMap: false,
+  devServer: {
+    port: port,
+    open: false,
+    overlay: {
+      warnings: false,
+      errors: true
+    },
+    proxy: {
+    // change xxx-api/login => mock/login
+    // detail: https://cli.vuejs.org/config/#devserver-proxy
+      [process.env.VUE_APP_BASE_API]: {
+        target: `http://127.0.0.1:${port}/mock`,
+        changeOrigin: true,
+        pathRewrite: {
+          ['^' + process.env.VUE_APP_BASE_API]: ''
+        }
+      }
+    },
+    after: require('./mock/mock-server.js')
+  },
+  configureWebpack: {
+    // provide the app's title in webpack's name field, so that
+    // it can be accessed in index.html to inject the correct title.
+    name: name
+  },
   pluginOptions: {
     electronBuilder: {
       outputDir: 'build',
       externals: ['vue-devtools'],
       nodeModulesPath: ['./node_modules'],
-      chainWebpackMainProcess: (config) => {
+      chainWebpackMainProcess: config => {
         config.resolve.alias.set('@', path.join(__dirname, 'src'))
       },
       chainWebpackRendererProcess: config => {
+        config.resolve.alias.set('@', path.join(__dirname, 'src'))
         // set svg-sprite-loader
         config.module
           .rule('svg')
